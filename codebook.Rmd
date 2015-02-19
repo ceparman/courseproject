@@ -1,0 +1,60 @@
+---
+title: "CodeBook"
+author: "Craig Parman"
+date: "2/18/2015"
+output:
+  html_document:
+    keep_md: yes
+---
+
+
+Code book for "tall_skiny_summary.txt"
+
+#summary
+
+This data table was created from the UCI HAR data set.  See the readme for download instructions and through description of the raw data.
+
+The data in tall_skiny_summary.txt consists of the mean and standard deviation for all values of the test and training data sets.  Only column that we results of means and standard deviation were used . *(Yeah, that makes no sense, but that was what the instructions said)*  All proicessing steps are in run_analysis.R
+
+#columns
+There are 4 columns in the final table.
+
+
+```{r}
+t<-read.table("tall_skiny_summary.txt",header=TRUE)
+print(names(t))
+```
+
+#Variables
+
+##Subject
+
+Meaning: Number assigned to test subject.
+
+Values:  1 to 30, 876 observations for each.
+
+##Activity
+Meaning: Type of activity during data collection
+
+Values:  6 values 
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
+
+##Measure
+Meaning:  The measurement and the type of summary statistic either mean or standard deviation. All values are in the form [raw measure].[initial summary]_statistic, where statistic is eith mean or std.
+
+Value: 1 of the 146 values listed.
+```{r} 
+print(names(table(t$Measure)))
+
+```
+
+##Value
+Meaning: value of the summary statistic calculated.
+
+Value: These floating point values. Units were not specified in the original data. 
+  

@@ -11,6 +11,7 @@
 #libraries loaded
 
 library(dplyr)
+library(tidyr)
 library(data.table)
 
 #First load the subject factors
@@ -38,11 +39,12 @@ testX<-tbl_df(read.table('UCI HAR Dataset/test/X_test.txt',col.names=features$fe
 #The measurements use "mean" and "std" to identify these operations. There is also names with 
 #meanFreq which we will remove.
 
-trainX<-select(trainX,c(contains("mean"),contains("std"),-contains("meanFreq") ))
-testX<-select(testX,c(contains("mean"),contains("std"),-contains("meanFreq")))
+testX<-select(testX,c(contains("mean"),contains("std")))
+testX<-select(testX, -contains("meanFreq"))
 
 
-
+trainX<-select(trainX,c(contains("mean"),contains("std")))
+trainX<-select(trainX, -contains("meanFreq"))
 
 
 
@@ -94,7 +96,7 @@ all_data$source <-as.factor(all_data$source)
 all_data$activity_label<-NULL
 
 #and the source column
-all_data$source <- NULL
+all_data$source <- NULL 
 
 #now we will calulate the summary statistics
 
